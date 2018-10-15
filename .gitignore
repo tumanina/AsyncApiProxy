@@ -1,5 +1,15 @@
-﻿################################################################################
+################################################################################
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
 /.vs/AsyncApiProxy/v15
+/.vs/AsyncApiProxy/DesignTimeBuild
+/AsyncApiProxy/bin/Debug/netcoreapp2.0
+/AsyncApiProxy/obj
+AsyncApiProxy.BusinessLogic/bin/
+AsyncApiProxy.BusinessLogic/obj/
+MessageBroker/bin/
+MessageBroker/obj/
+Tests/MessageBroker.Unit.Tests/bin/Debug/netcoreapp2.0/MessageBroker.pdb
+Tests/MessageBroker.Unit.Tests/bin/
+Tests/MessageBroker.Unit.Tests/obj/

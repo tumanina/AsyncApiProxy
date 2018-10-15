@@ -1,0 +1,8 @@
+﻿namespace MessageBroker
+{
+    public enum MessageType
+    {
+        Undefined = 0,
+        CreateAddress = 1
+    }
+}
