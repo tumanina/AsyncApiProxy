@@ -3,6 +3,6 @@
     public enum MessageType
     {
         Undefined = 0,
-        CreateAddress = 1
+        Test = 1
     }
 }

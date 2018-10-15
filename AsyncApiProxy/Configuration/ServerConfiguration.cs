@@ -1,4 +1,4 @@
-﻿namespace AsyncApiProxy.Configuration
+﻿namespace AsyncApiProxy.Api.Configuration
 {
     public class ServerConfiguration
     {

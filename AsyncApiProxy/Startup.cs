@@ -5,10 +5,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RabbitMQ.Client;
-using AsyncApiProxy.Configuration;
 using AsyncApiProxy.BusinessLogic;
+using AsyncApiProxy.Api.Configuration;
 
-namespace AsyncApiProxy
+namespace AsyncApiProxy.Api
 {
     public class Startup
     {
@@ -25,6 +25,7 @@ namespace AsyncApiProxy
 
             services.AddSingleton<ISubscriptionFactory, SubscriptionFactory>();
             services.AddSingleton<ISenderProcessor, SenderProcessor>();
+            services.AddSingleton<IMessageService, MessageService>();
 
             var senders = Configuration.GetSection("Senders").Get<IEnumerable<SenderConfiguration>>();
 
@@ -41,7 +42,7 @@ namespace AsyncApiProxy
 
             var callbackServerConfiguration = Configuration.GetSection("CallBackServer").Get<ServerConfiguration>();
 
-            services.AddSingleton<IMessageService>(t => new MessageService(
+            services.AddSingleton<IRequestManager>(t => new RequestManager(
                 new ConnectionFactory
                 {
                     HostName = callbackServerConfiguration.Host,

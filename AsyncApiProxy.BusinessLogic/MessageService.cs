@@ -1,41 +1,52 @@
 ﻿using MessageBroker;
-using RabbitMQ.Client;
+using MessageBroker.Messages;
+using Newtonsoft.Json;
 using System;
 
 namespace AsyncApiProxy.BusinessLogic
 {
     public class MessageService : IMessageService
     {
-        private readonly IConnectionFactory _connectionFactory;
-        private readonly ISenderProcessor _senderProcessor;
-        private readonly ISubscriptionFactory _subsctiptionFactory;
-        private readonly int _timeToWait;
+        private readonly IRequestManager _requestManager;
 
-        public MessageService(IConnectionFactory connectionFactory, ISenderProcessor senderProcessor, ISubscriptionFactory subsctiptionFactory, int timeToWait)
+        public MessageService(IRequestManager requestManager)
         {
-            _connectionFactory = connectionFactory;
-            _senderProcessor = senderProcessor;
-            _subsctiptionFactory = subsctiptionFactory;
-            _timeToWait = timeToWait;
+            _requestManager = requestManager;
         }
 
-        public void SendMessage(string message)
+        public Result SendMessage(string text)
         {
-            var connection = _connectionFactory.CreateConnection();
+            var taskId = Guid.NewGuid();
 
-            try
-            {
-                var channel = connection.CreateModel();
-                channel.ExchangeDeclare("amq.direct", ExchangeType.Direct, true);
+            var callbackQueueName = $"{taskId}_CallbackQueue";
 
-                _senderProcessor.SendMessage("test", message);
-                connection.Close();
-            }
-            catch (Exception)
+            var message = new TextMessage
             {
-                connection.Close();
-                throw;
+                Text = text,
+                CallbackQueueName = callbackQueueName,
+                TaskId = taskId,
+            };
+
+            var result = _requestManager.TryToExecute(MessageType.Test.ToString(), JsonConvert.SerializeObject(message), callbackQueueName);
+
+            if (result.Result)
+            {
+                try
+                {
+                    var response = JsonConvert.DeserializeObject<Result>(result.Value);
+
+                    if (!string.IsNullOrEmpty(response?.Value))
+                    {
+                        return response;
+                    }
+                }
+                catch (Exception)
+                {
+                    throw new Exception("Problem with response deserialization.");
+                }
             }
+
+            return new Result { TaskId = taskId };
         }
     }
 }

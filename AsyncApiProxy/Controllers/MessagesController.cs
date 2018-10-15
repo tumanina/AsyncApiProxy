@@ -1,10 +1,12 @@
-﻿using AsyncApiProxy.BusinessLogic;
+﻿using AsyncApiProxy.Api.Models;
+using AsyncApiProxy.BusinessLogic;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
-namespace AsyncApiProxy.Controllers
+namespace AsyncApiProxy.Api.Controllers
 {
-    [Route("api/messages")]
-    public class MessagesController : Controller
+    [Route("api/v1/[controller]")]
+    public class MessagesController : BaseController
     {
         private readonly IMessageService _messageService;
 
@@ -14,9 +16,23 @@ namespace AsyncApiProxy.Controllers
         }
 
         [HttpPost]
-        public void Post([FromBody]string message)
+        public IActionResult Post([FromBody]string message)
         {
-            _messageService.SendMessage(message);
+            try
+            {
+                var result = _messageService.SendMessage(message);
+
+                if (!string.IsNullOrEmpty(result.Value))
+                {
+                    return Ok(new Models.Result { Value = result.Value });
+                }
+
+                return result.TaskId.HasValue ? Ok(new TimeOutResult { TaskId = result.TaskId.Value }) : StatusCode(500, "Request failed");
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
         }
     }
 }
