@@ -2,10 +2,9 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using MessageBroker;
 using RabbitMQ.Client;
 
-namespace MultiWallet.UnitTests.MessageBrokerTests
+namespace MessageBroker.UnitTests
 {
     [TestClass]
     public class SenderTest

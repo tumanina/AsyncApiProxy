@@ -7,35 +7,23 @@ namespace MessageBroker
 {
     public class Sender : ISender
     {
-        private readonly string _host;
-        private readonly int _port;
-        private readonly string _userName;
-        private readonly string _password;
+        private readonly IConnectionFactory _connectionFactory;
         private readonly string _queueName;
         private readonly string _exchangeName;
 
         public string Type { get; }
 
-        public Sender(string type, string host, string userName, string password, string queueName, string exchangeName)
+        public Sender(IConnectionFactory connectionFactory, string type, string queueName, string exchangeName)
         {
             Type = type;
-            _host = host;
-            _userName = userName;
-            _password = password;
             _queueName = queueName;
             _exchangeName = exchangeName;
+            _connectionFactory = connectionFactory;
         }
 
         public void SendMessage(string message)
         {
-            var connectionFactory = new ConnectionFactory
-            {
-                HostName = _host,
-                UserName = _userName,
-                Password = _password
-            };
-
-            using (var connection = connectionFactory.CreateConnection())
+            using (var connection = _connectionFactory.CreateConnection())
             {
                 using (var model = connection.CreateModel())
                 {

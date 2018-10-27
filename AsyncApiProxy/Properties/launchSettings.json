@@ -3,7 +3,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:49577/",
+      "applicationUrl": "http://localhost:49578/",
       "sslPort": 0
     }
   },
@@ -19,11 +19,11 @@
     "AsyncApiProxy": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api/values",
+      "launchUrl": "api/v1/messages",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "http://localhost:49578/"
+      "applicationUrl": "http://localhost:49579/"
     }
   }
 }

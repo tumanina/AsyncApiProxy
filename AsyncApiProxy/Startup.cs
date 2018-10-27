@@ -33,8 +33,15 @@ namespace AsyncApiProxy.Api
             {
                 foreach (var sender in senders)
                 {
-                    services.AddSingleton<ISender>(t => new Sender(sender.Type, sender.Server.Host, sender.Server.UserName,
-                        sender.Server.Password, sender.QueueName, sender.ExchangeName));
+                    services.AddSingleton<ISender>(t => new Sender(new ConnectionFactory
+                    {
+                        HostName = sender.Server.Host,
+                        UserName = sender.Server.UserName,
+                        Password = sender.Server.Password
+                    },
+                        sender.Type,
+                        sender.QueueName,
+                        sender.ExchangeName));
                 }
             }
 
