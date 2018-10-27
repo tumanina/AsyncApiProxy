@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 
-namespace AsyncApiProxy.Api.Controllers
+namespace AsyncApiProxy.Api.Areas.V1.Controllers
 {
     public class BaseController: Controller
     {
