@@ -10,6 +10,7 @@ using AsyncApiProxy.Api.Configuration;
 using AsyncApiProxy.DAL.DBContext;
 using Microsoft.EntityFrameworkCore;
 using AsyncApiProxy.DAL.Repositories;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace AsyncApiProxy.Api
 {
@@ -30,13 +31,18 @@ namespace AsyncApiProxy.Api
 
             services.AddSingleton<ITaskContext, TaskContext>();
 
-            services.AddMvc();
-
             services.AddSingleton<ISubscriptionFactory, SubscriptionFactory>();
             services.AddSingleton<ISenderProcessor, SenderProcessor>();
             services.AddSingleton<IClientService, ClientService>();
             services.AddSingleton<ITaskService, TaskService>();
             services.AddSingleton<ITaskRepository, TaskRepository>();
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "AsyncApi", Version = "v1" });
+            });
+
+            services.AddMvc();
 
             var senders = Configuration.GetSection("Senders").Get<IEnumerable<SenderConfiguration>>();
 
@@ -80,7 +86,19 @@ namespace AsyncApiProxy.Api
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseMvc();
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "AsyncApi V1");
+            });
+
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller}/{id}");
+            });
         }
     }
 }
