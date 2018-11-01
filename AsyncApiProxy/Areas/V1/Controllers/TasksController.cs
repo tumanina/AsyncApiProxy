@@ -1,4 +1,5 @@
 ﻿using System;
+using AsyncApiProxy.Api.Models;
 using AsyncApiProxy.BusinessLogic;
 using Microsoft.AspNetCore.Mvc;
 
@@ -38,7 +39,7 @@ namespace AsyncApiProxy.Api.Areas.V1.Controllers
                     return NotFound();
                 }
 
-                return Ok(task);
+                return Ok(new Task(task));
             }
             catch (Exception ex)
             {
