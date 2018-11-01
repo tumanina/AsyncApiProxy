@@ -7,6 +7,9 @@ using Microsoft.Extensions.DependencyInjection;
 using RabbitMQ.Client;
 using AsyncApiProxy.BusinessLogic;
 using AsyncApiProxy.Api.Configuration;
+using AsyncApiProxy.DAL.DBContext;
+using Microsoft.EntityFrameworkCore;
+using AsyncApiProxy.DAL.Repositories;
 
 namespace AsyncApiProxy.Api
 {
@@ -21,6 +24,12 @@ namespace AsyncApiProxy.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
+            var connectionString = Configuration.GetConnectionString("TaskDBConnectionString");
+
+            services.AddDbContext<TaskContext>(options => options.UseSqlServer(connectionString), ServiceLifetime.Singleton);
+
+            services.AddSingleton<ITaskContext, TaskContext>();
+
             services.AddMvc();
 
             services.AddSingleton<ISubscriptionFactory, SubscriptionFactory>();

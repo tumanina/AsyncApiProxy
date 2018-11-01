@@ -11,7 +11,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{AA605E5E
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessageBroker.Unit.Tests", "Tests\MessageBroker.Unit.Tests\MessageBroker.Unit.Tests.csproj", "{63CFA8B8-3A43-4D23-821D-F3C5C8F45E85}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncApiProxy.BusinessLogic", "AsyncApiProxy.BusinessLogic\AsyncApiProxy.BusinessLogic.csproj", "{42D7DCF7-184F-43F7-AA5C-957A13FEE229}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AsyncApiProxy.BusinessLogic", "AsyncApiProxy.BusinessLogic\AsyncApiProxy.BusinessLogic.csproj", "{42D7DCF7-184F-43F7-AA5C-957A13FEE229}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncApiProxy.DAL", "AsyncApiProxy.DAL\AsyncApiProxy.DAL.csproj", "{4687B3F6-0E9C-4B11-923B-2C96513EA3DC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +37,10 @@ Global
 		{42D7DCF7-184F-43F7-AA5C-957A13FEE229}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{42D7DCF7-184F-43F7-AA5C-957A13FEE229}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{42D7DCF7-184F-43F7-AA5C-957A13FEE229}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4687B3F6-0E9C-4B11-923B-2C96513EA3DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4687B3F6-0E9C-4B11-923B-2C96513EA3DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4687B3F6-0E9C-4B11-923B-2C96513EA3DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4687B3F6-0E9C-4B11-923B-2C96513EA3DC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
