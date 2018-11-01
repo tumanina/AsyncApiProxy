@@ -35,6 +35,8 @@ namespace AsyncApiProxy.Api
             services.AddSingleton<ISubscriptionFactory, SubscriptionFactory>();
             services.AddSingleton<ISenderProcessor, SenderProcessor>();
             services.AddSingleton<IClientService, ClientService>();
+            services.AddSingleton<ITaskService, TaskService>();
+            services.AddSingleton<ITaskRepository, TaskRepository>();
 
             var senders = Configuration.GetSection("Senders").Get<IEnumerable<SenderConfiguration>>();
 

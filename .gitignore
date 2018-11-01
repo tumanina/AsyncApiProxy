@@ -13,3 +13,5 @@ MessageBroker/obj/
 Tests/MessageBroker.Unit.Tests/bin/Debug/netcoreapp2.0/MessageBroker.pdb
 Tests/MessageBroker.Unit.Tests/bin/
 Tests/MessageBroker.Unit.Tests/obj/
+AsyncApiProxy.DAL/bin/
+AsyncApiProxy.DAL/obj/

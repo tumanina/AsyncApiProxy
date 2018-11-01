@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AsyncApiProxy.BusinessLogic\AsyncApiProxy.BusinessLogic.csproj" />
+    <ProjectReference Include="..\AsyncApiProxy.DAL\AsyncApiProxy.DAL.csproj" />
     <ProjectReference Include="..\MessageBroker\MessageBroker.csproj" />
   </ItemGroup>
 
