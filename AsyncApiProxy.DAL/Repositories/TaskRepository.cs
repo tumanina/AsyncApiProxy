@@ -7,9 +7,9 @@ namespace AsyncApiProxy.DAL.Repositories
 {
     public class TaskRepository: ITaskRepository
     {
-        private readonly TaskContextFactory _factory;
+        private readonly ITaskContextFactory _factory;
 
-        public TaskRepository(TaskContextFactory factory)
+        public TaskRepository(ITaskContextFactory factory)
         {
             _factory = factory;
         }

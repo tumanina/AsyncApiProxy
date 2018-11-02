@@ -15,3 +15,5 @@ Tests/MessageBroker.Unit.Tests/bin/
 Tests/MessageBroker.Unit.Tests/obj/
 AsyncApiProxy.DAL/bin/
 AsyncApiProxy.DAL/obj/
+Tests/AsyncApiProxy.Unit.Tests/obj/
+Tests/AsyncApiProxy.Unit.Tests/bin/

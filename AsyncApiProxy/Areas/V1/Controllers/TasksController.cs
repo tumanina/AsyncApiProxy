@@ -1,5 +1,5 @@
 ﻿using System;
-using AsyncApiProxy.Api.Models;
+using AsyncApiProxy.Api.Areas.V1.Models;
 using AsyncApiProxy.BusinessLogic;
 using Microsoft.AspNetCore.Mvc;
 

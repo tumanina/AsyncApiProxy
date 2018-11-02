@@ -4,6 +4,10 @@ namespace AsyncApiProxy.BusinessLogic.Models
 {
     public class Task
     {
+        public Task()
+        {
+        }
+
         public Task(DAL.Entities.Task entity)
         {
             Id = entity.Id;

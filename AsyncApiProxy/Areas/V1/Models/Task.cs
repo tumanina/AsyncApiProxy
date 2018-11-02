@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AsyncApiProxy.Api.Models
+namespace AsyncApiProxy.Api.Areas.V1.Models
 {
     public class Task
     {

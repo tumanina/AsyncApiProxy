@@ -1,4 +1,4 @@
-﻿using AsyncApiProxy.Api.Areas.V1.Controllers.Models;
+﻿using AsyncApiProxy.Api.Areas.V1.Models;
 using AsyncApiProxy.Api.Models;
 using AsyncApiProxy.BusinessLogic;
 using AsyncApiProxy.BusinessLogic.Models;

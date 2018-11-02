@@ -7,12 +7,8 @@ namespace AsyncApiProxy.Api.Areas.V1.Controllers
     {
         protected ObjectResult InternalServerError(Exception ex)
         {
-            return StatusCode(500, ex.InnerMessage());
-        }
-
-        private ObjectResult StatusCode(int v, object p)
-        {
-            throw new NotImplementedException();
+            var message = ex.InnerMessage();
+            return StatusCode(500, message);
         }
 
         protected ObjectResult InternalServerError(string message)
@@ -23,6 +19,11 @@ namespace AsyncApiProxy.Api.Areas.V1.Controllers
         protected ObjectResult Unauthorized(string message)
         {
             return StatusCode(401, message);
+        }
+
+        protected string GetCreatedUrl(string id)
+        {
+            return Request.Scheme + "://" + Request.Host + Request.Path + "/" + id;
         }
     }
 
