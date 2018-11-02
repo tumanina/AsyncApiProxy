@@ -7,52 +7,61 @@ namespace AsyncApiProxy.DAL.Repositories
 {
     public class TaskRepository: ITaskRepository
     {
-        private readonly ITaskContext _context;
+        private readonly TaskContextFactory _factory;
 
-        public TaskRepository(ITaskContext context)
+        public TaskRepository(TaskContextFactory factory)
         {
-            _context = context;
+            _factory = factory;
         }
 
         public Task GetTask(Guid id)
         {
-            return _context.Task.FirstOrDefault(t => t.Id == id);
+            using (var context = _factory.CreateDBContext())
+            {
+                return context.Task.FirstOrDefault(t => t.Id == id);
+            }
         }
 
         public Task CreateTask(int type, int status, string data)
         {
-            var tasks = _context.Set<Task>();
-
-            var task = new Task
+            using (var context = _factory.CreateDBContext())
             {
-                Type = type,
-                Data = data,
-                Status = status,
-                CreatedDate = DateTime.UtcNow,
-                UpdatedDate = DateTime.UtcNow
-            };
+                var tasks = context.Set<Task>();
 
-            tasks.Add(task);
+                var task = new Task
+                {
+                    Type = type,
+                    Data = data,
+                    Status = status,
+                    CreatedDate = DateTime.UtcNow,
+                    UpdatedDate = DateTime.UtcNow
+                };
 
-            _context.SaveChanges();
+                tasks.Add(task);
 
-            return GetTask(task.Id);
+                context.SaveChanges();
+
+                return GetTask(task.Id);
+            }
         }
 
         public Task UpdateStatus(Guid id, int status)
         {
-            var result = _context.Task.SingleOrDefault(b => b.Id == id);
-            if (result != null)
+            using (var context = _factory.CreateDBContext())
             {
-                result.Status = status;
-                _context.SaveChanges();
-            }
-            else
-            {
-                return null;
-            }
+                var result = context.Task.SingleOrDefault(b => b.Id == id);
+                if (result != null)
+                {
+                    result.Status = status;
+                    context.SaveChanges();
+                }
+                else
+                {
+                    return null;
+                }
 
-            return GetTask(id);
+                return GetTask(id);
+            }
         }
     }
 }

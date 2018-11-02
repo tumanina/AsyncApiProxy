@@ -27,7 +27,10 @@ namespace AsyncApiProxy.Api
         {
             var connectionString = Configuration.GetConnectionString("TaskDBConnectionString");
 
-            services.AddDbContext<TaskContext>(options => options.UseSqlServer(connectionString), ServiceLifetime.Singleton);
+            var dbOptions = new DbContextOptionsBuilder<TaskContext>();
+            dbOptions.UseSqlServer(connectionString);
+            services.AddSingleton<ITaskContextFactory>(t => new TaskContextFactory(dbOptions));
+
 
             services.AddSingleton<ITaskContext, TaskContext>();
 
