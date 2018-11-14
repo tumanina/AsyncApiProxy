@@ -1,4 +1,5 @@
 using AsyncApiProxy.BusinessLogic;
+using AsyncApiProxy.BusinessLogic.Models;
 using AsyncApiProxy.DAL.Repositories;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -91,6 +92,36 @@ namespace AsyncApiProxy.Unit.Tests.ServiceTests
 
             TaskRepository.Verify(x => x.GetTask(id), Times.Once);
             Assert.AreEqual(result, null);
+        }
+
+        [TestMethod]
+        public void CreateTask_Correct_ShouldTask()
+        {
+            TaskRepository.ResetCalls();
+
+            var taskId = Guid.NewGuid();
+            var taskTypeId = 0;
+            var taskStatus = 0;
+            var data = string.Empty;
+            var date = DateTime.UtcNow;
+
+            TaskRepository.Setup(x => x.CreateTask(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>()))
+                .Callback((int taskTypeParam, int statusParam, string dataParam) =>
+                {
+                    taskTypeId = taskTypeParam;
+                    taskStatus = statusParam;
+                    data = dataParam;
+                })
+                .Returns(new DAL.Entities.Task { Id = taskId, Status = (int)TaskStatus.Created, CreatedDate = date, UpdatedDate = date });
+
+            var service = new TaskService(TaskRepository.Object);
+            var result = service.CreateTask(TaskType.CreateClient, "name: test");
+
+            TaskRepository.Verify(x => x.CreateTask(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>()), Times.Once);
+            Assert.AreEqual(result.Id, taskId);
+            Assert.AreEqual(taskTypeId, (int)TaskType.CreateClient);
+            Assert.AreEqual(taskStatus, (int)TaskStatus.Created);
+            Assert.IsFalse(data.Contains(taskId.ToString()));
         }
     }
 }

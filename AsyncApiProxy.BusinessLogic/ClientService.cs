@@ -1,5 +1,4 @@
 ﻿using AsyncApiProxy.BusinessLogic.Models;
-using AsyncApiProxy.DAL.Repositories;
 using MessageBroker;
 using MessageBroker.Messages;
 using Newtonsoft.Json;
@@ -10,17 +9,17 @@ namespace AsyncApiProxy.BusinessLogic
     public class ClientService : IClientService
     {
         private readonly IRequestManager _requestManager;
-        private readonly ITaskRepository _taskRepository;
+        private readonly ITaskService _taskService;
 
-        public ClientService(ITaskRepository taskRepository, IRequestManager requestManager)
+        public ClientService(ITaskService taskService, IRequestManager requestManager)
         {
             _requestManager = requestManager;
-            _taskRepository = taskRepository;
+            _taskService = taskService;
         }
 
         public CreateClientResult CreateClient(Client client)
         {
-            var task = _taskRepository.CreateTask((int)TaskType.CreateClient, (int)TaskStatus.Created, JsonConvert.SerializeObject(new { client.Email, client.Name }));
+            var task = _taskService.CreateTask(TaskType.CreateClient, JsonConvert.SerializeObject(new { client.Email, client.Name }));
 
             var callbackQueueName = $"{task.Id}_CallbackQueue";
 
