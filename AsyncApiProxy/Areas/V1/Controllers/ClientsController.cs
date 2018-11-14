@@ -47,7 +47,7 @@ namespace AsyncApiProxy.Api.Areas.V1.Controllers
                     return InternalServerError(result.Error);
                 }
 
-                return Ok(new Models.CreateClientResult { Id = result.Id });
+                return Ok(new Models.CreateClientResult { Id = result.Id.Value });
             }
             catch (Exception ex)
             {

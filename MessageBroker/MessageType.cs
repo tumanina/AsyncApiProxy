@@ -3,6 +3,6 @@
     public enum MessageType
     {
         Undefined = 0,
-        Clients = 1
+        CreateClient = 1
     }
 }

@@ -17,3 +17,5 @@ AsyncApiProxy.DAL/bin/
 AsyncApiProxy.DAL/obj/
 Tests/AsyncApiProxy.Unit.Tests/obj/
 Tests/AsyncApiProxy.Unit.Tests/bin/
+packages/
+Tests/ApiProxy.Unit.Tests/obj/

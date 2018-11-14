@@ -7,18 +7,18 @@ namespace AsyncApiProxy.Api.Areas.V1.Models
         public Task(BusinessLogic.Models.Task model)
         {
             Id = model.Id;
-            Type = model.Type;
+            Type = model.Type.ToString();
             Data = model.Data;
             Result = model.Result;
-            Status = model.Status;
+            Status = model.Status.ToString();
             Error = model.Error;
         }
 
         public Guid Id { get; set; }
-        public int Type { get; set; }
+        public string Type { get; set; }
         public string Data { get; set; }
         public string Result { get; set; }
-        public int Status { get; set; }
+        public string Status { get; set; }
         public string Error { get; set; }
 
     }

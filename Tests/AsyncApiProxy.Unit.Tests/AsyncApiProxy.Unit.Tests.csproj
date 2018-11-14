@@ -14,15 +14,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ControllerTests\" />
-    <Folder Include="ServiceTests\" />
-    <Folder Include="RepositoryTests\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\AsyncApiProxy.BusinessLogic\AsyncApiProxy.BusinessLogic.csproj" />
     <ProjectReference Include="..\..\AsyncApiProxy.DAL\AsyncApiProxy.DAL.csproj" />
     <ProjectReference Include="..\..\AsyncApiProxy\AsyncApiProxy.Api.csproj" />
+    <ProjectReference Include="..\..\MessageBroker\MessageBroker.csproj" />
   </ItemGroup>
 
 </Project>

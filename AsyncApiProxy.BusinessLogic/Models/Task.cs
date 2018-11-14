@@ -11,18 +11,18 @@ namespace AsyncApiProxy.BusinessLogic.Models
         public Task(DAL.Entities.Task entity)
         {
             Id = entity.Id;
-            Type = entity.Type;
+            Type = (TaskType)entity.Type;
             Data = entity.Data;
             Result = entity.Result;
-            Status = entity.Status;
+            Status = (TaskStatus)entity.Status;
             Error = entity.Error;
         }
 
         public Guid Id { get; set; }
-        public int Type { get; set; }
+        public TaskType Type { get; set; }
         public string Data { get; set; }
         public string Result { get; set; }
-        public int Status { get; set; }
+        public TaskStatus Status { get; set; }
         public string Error { get; set; }
 
     }

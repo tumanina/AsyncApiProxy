@@ -1,5 +1,6 @@
 ﻿using AsyncApiProxy.Api.Areas.V1.Controllers;
 using AsyncApiProxy.BusinessLogic;
+using AsyncApiProxy.BusinessLogic.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -19,8 +20,8 @@ namespace AsyncApiProxy.Unit.Tests.ControllerTests
             TaskService.ResetCalls();
 
             var id = Guid.NewGuid();
-            var type = 1;
-            var status = 1;
+            var type = TaskType.CreateClient;
+            var status = TaskStatus.Created;
             var data = "123457";
             var taskResult = "jfghyfgt6747";
 
@@ -34,8 +35,8 @@ namespace AsyncApiProxy.Unit.Tests.ControllerTests
 
             TaskService.Verify(x => x.GetTask(id), Times.Once);
             Assert.AreEqual(result.StatusCode, 200);
-            Assert.AreEqual(task.Type, type);
-            Assert.AreEqual(task.Status, status);
+            Assert.AreEqual(task.Type, type.ToString());
+            Assert.AreEqual(task.Status, status.ToString());
             Assert.AreEqual(task.Result, taskResult);
         }
         
