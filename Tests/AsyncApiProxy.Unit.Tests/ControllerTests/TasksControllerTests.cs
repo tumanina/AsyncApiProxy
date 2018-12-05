@@ -17,7 +17,7 @@ namespace AsyncApiProxy.Unit.Tests.ControllerTests
         [TestMethod]
         public void GetTask_TaskExisted_ReturnOk()
         {
-            TaskService.ResetCalls();
+            TaskService.Invocations.Clear();
 
             var id = Guid.NewGuid();
             var type = TaskType.CreateClient;
@@ -43,7 +43,7 @@ namespace AsyncApiProxy.Unit.Tests.ControllerTests
         [TestMethod]
         public void GetTask_TaskNotExisted_ReturnNotFound()
         {
-            TaskService.ResetCalls();
+            TaskService.Invocations.Clear();
 
             var id = Guid.NewGuid();
 
@@ -63,7 +63,7 @@ namespace AsyncApiProxy.Unit.Tests.ControllerTests
         [TestMethod]
         public void GetTask_ServiceReturnException_ReturnInternalServerError()
         {
-            TaskService.ResetCalls();
+            TaskService.Invocations.Clear();
 
             var id = Guid.NewGuid();
             var exceptionMessage = "some exception message";

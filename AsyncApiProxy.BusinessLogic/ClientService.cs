@@ -19,7 +19,7 @@ namespace AsyncApiProxy.BusinessLogic
 
         public CreateClientResult CreateClient(Client client)
         {
-            var task = _taskService.CreateTask(TaskType.CreateClient, JsonConvert.SerializeObject(new { client.Email, client.Name }));
+            var task = _taskService.CreateTask(TaskType.CreateClient, JsonConvert.SerializeObject(new { client.Email, client.Name, client.Password }));
 
             var callbackQueueName = $"{task.Id}_CallbackQueue";
 

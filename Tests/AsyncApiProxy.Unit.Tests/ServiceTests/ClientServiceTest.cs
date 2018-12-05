@@ -21,6 +21,7 @@ namespace AsyncApiProxy.Unit.Tests
 
             var name = "Ivan Ivanov";
             var email = "ivanov@yandex.ru";
+            var password = "123654";
             var taskId = Guid.NewGuid();
             var taskTypeId = 0;
             var data = string.Empty;
@@ -49,7 +50,7 @@ namespace AsyncApiProxy.Unit.Tests
                 .Returns(new RequestResult { Result = true, Value = JsonConvert.SerializeObject(new { Id = clienId })});
             
             var service = new ClientService(TaskService.Object, RequestManager.Object);
-            var result = service.CreateClient(new Client { Name = name, Email = email });
+            var result = service.CreateClient(new Client { Name = name, Email = email, Password = password });
 
             TaskService.Verify(x => x.CreateTask(It.IsAny<TaskType>(), It.IsAny<string>()), Times.Once);
             RequestManager.Verify(x => x.TryToExecute(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()), Times.Once);
@@ -71,6 +72,7 @@ namespace AsyncApiProxy.Unit.Tests
 
             var name = "Ivan Ivanov";
             var email = "ivanov@yandex.ru";
+            var password = "123654";
             var taskId = Guid.NewGuid();
             var taskTypeId = 0;
             var data = string.Empty;
@@ -99,7 +101,7 @@ namespace AsyncApiProxy.Unit.Tests
             .Returns(new RequestResult { Result = false });
 
             var service = new ClientService(TaskService.Object, RequestManager.Object);
-            var result = service.CreateClient(new Client { Name = name, Email = email });
+            var result = service.CreateClient(new Client { Name = name, Email = email, Password = password });
 
             TaskService.Verify(x => x.CreateTask(It.IsAny<TaskType>(), It.IsAny<string>()), Times.Once);
             RequestManager.Verify(x => x.TryToExecute(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()), Times.Once);
@@ -115,8 +117,8 @@ namespace AsyncApiProxy.Unit.Tests
 
         private void ResetCalls()
         {
-            TaskService.ResetCalls();
-            RequestManager.ResetCalls();
+            TaskService.Invocations.Clear();
+            RequestManager.Invocations.Clear();
         }
     }
 }

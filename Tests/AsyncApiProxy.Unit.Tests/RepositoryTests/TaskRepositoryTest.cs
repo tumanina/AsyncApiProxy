@@ -19,7 +19,7 @@ namespace AsyncApiProxy.Unit.Tests.RepositoryTests
         [TestMethod]
         public void GetTask_TaskExisted_UseDbContextReturnCorrect()
         {
-            TaskContext.ResetCalls();
+            TaskContext.Invocations.Clear();
 
             var mockSet = new Mock<DbSet<Task>>();
 
@@ -65,7 +65,7 @@ namespace AsyncApiProxy.Unit.Tests.RepositoryTests
         [TestMethod]
         public void GetTask_TaskNotExisted_UseDbContextReturnNull()
         {
-            TaskContext.ResetCalls();
+            TaskContext.Invocations.Clear();
             var mockSet = new Mock<DbSet<Task>>();
 
             var id1 = Guid.NewGuid();
@@ -103,7 +103,7 @@ namespace AsyncApiProxy.Unit.Tests.RepositoryTests
         [TestMethod]
         public void CreateTask_Correct_UseDbContextReturnCorrect()
         {
-            TaskContext.ResetCalls();
+            TaskContext.Invocations.Clear();
 
             var id1 = Guid.NewGuid();
             var typeId1 = 1;
@@ -156,7 +156,7 @@ namespace AsyncApiProxy.Unit.Tests.RepositoryTests
         [TestMethod]
         public void UpdateTaskStatus_TaskExist_UseDbContextReturnCorrect()
         {
-            TaskContext.ResetCalls();
+            TaskContext.Invocations.Clear();
 
             var id1 = Guid.NewGuid();
             var typeId1 = 1;
@@ -195,7 +195,7 @@ namespace AsyncApiProxy.Unit.Tests.RepositoryTests
         [TestMethod]
         public void UpdateTaskStatus_TaskNotExisted_UseDbContextReturnCorrect()
         {
-            TaskContext.ResetCalls();
+            TaskContext.Invocations.Clear();
 
             var id1 = Guid.NewGuid();
             var id2 = Guid.NewGuid();

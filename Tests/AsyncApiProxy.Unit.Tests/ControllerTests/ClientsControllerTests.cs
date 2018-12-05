@@ -19,21 +19,24 @@ namespace AsyncApiProxy.Unit.Tests.ControllerTests
         [TestMethod]
         public void CreateClient_ServiceReturnClient_ReturnOk()
         {
-            ClientService.ResetCalls();
+            ClientService.Invocations.Clear();
 
             var name = "Ivan Ivanov";
             var email = "ivanov@yandex.ru";
+            var password = "123654";
             var clientId = Guid.NewGuid();
             var requestedName = string.Empty;
             var requestedEmail = string.Empty;
+            var requestedPassword = string.Empty;
 
-            var request = new CreateClientRequest { Name = name, Email = email };
+            var request = new CreateClientRequest { Name = name, Email = email, Password = password };
 
             ClientService.Setup(x => x.CreateClient(It.IsAny<Client>()))
                 .Callback<Client>((clientParam) =>
                 {
                     requestedName = clientParam.Name;
                     requestedEmail = clientParam.Email;
+                    requestedPassword = clientParam.Password;
                 })
                 .Returns(new BusinessLogic.Models.CreateClientResult { Id = clientId });
 
@@ -50,28 +53,32 @@ namespace AsyncApiProxy.Unit.Tests.ControllerTests
             Assert.AreEqual(createResult.Id, clientId);
             Assert.AreEqual(requestedName, name);
             Assert.AreEqual(requestedEmail, email);
+            Assert.AreEqual(requestedPassword, password);
             Assert.AreEqual(result.StatusCode, 200);
         }
 
         [TestMethod]
         public void CreateClient_ServiceReturnTask_ReturnOk()
         {
-            ClientService.ResetCalls();
+            ClientService.Invocations.Clear();
 
             var name = "Ivan Ivanov";
             var email = "ivanov@yandex.ru";
+            var password = "123654";
             var clientId = Guid.NewGuid();
             var requestedName = string.Empty;
             var requestedEmail = string.Empty;
+            var requestedPassword = string.Empty;
             var taskId = Guid.NewGuid();
 
-            var request = new CreateClientRequest { Name = name, Email = email };
+            var request = new CreateClientRequest { Name = name, Email = email, Password = password };
 
             ClientService.Setup(x => x.CreateClient(It.IsAny<Client>()))
                 .Callback<Client>((clientParam) =>
                 {
                     requestedName = clientParam.Name;
                     requestedEmail = clientParam.Email;
+                    requestedPassword = clientParam.Password;
                 })
                 .Returns(new BusinessLogic.Models.CreateClientResult { TaskId = taskId });
 
@@ -87,6 +94,7 @@ namespace AsyncApiProxy.Unit.Tests.ControllerTests
             ClientService.Verify(x => x.CreateClient(It.IsAny<Client>()), Times.Once);
             Assert.AreEqual(requestedName, name);
             Assert.AreEqual(requestedEmail, email);
+            Assert.AreEqual(requestedPassword, password);
             Assert.AreEqual(createResult.TaskId, taskId);
             Assert.AreEqual(result.StatusCode, 200);
         }
@@ -94,21 +102,24 @@ namespace AsyncApiProxy.Unit.Tests.ControllerTests
         [TestMethod]
         public void CreateClient_ServiceReturnException_ReturnInternalServiceError()
         {
-            ClientService.ResetCalls();
+            ClientService.Invocations.Clear();
 
             var name = "Ivan Ivanov";
             var email = "ivanov@yandex.ru";
+            var password = "123654";
             var requestedName = string.Empty;
             var requestedEmail = string.Empty;
+            var requestedPassword = string.Empty;
             var exceptionMessage = "some exception message";
 
-            var request = new CreateClientRequest { Name = name, Email = email };
+            var request = new CreateClientRequest { Name = name, Email = email, Password = password };
 
             ClientService.Setup(x => x.CreateClient(It.IsAny<Client>()))
                 .Callback<Client>((clientParam) =>
                 {
                     requestedName = clientParam.Name;
                     requestedEmail = clientParam.Email;
+                    requestedPassword = clientParam.Password;
                 })
                 .Throws(new Exception(exceptionMessage));
 
@@ -124,6 +135,7 @@ namespace AsyncApiProxy.Unit.Tests.ControllerTests
             ClientService.Verify(x => x.CreateClient(It.IsAny<Client>()), Times.Once);
             Assert.AreEqual(requestedName, name);
             Assert.AreEqual(requestedEmail, email);
+            Assert.AreEqual(requestedPassword, password);
             Assert.IsTrue(result == null);
             Assert.IsTrue(result1 != null);
             Assert.AreEqual(result1.StatusCode, 500);

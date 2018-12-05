@@ -15,7 +15,7 @@ namespace AsyncApiProxy.Unit.Tests.ServiceTests
         [TestMethod]
         public void GetTask_TaskExisted_ShouldReturnCorrect()
         {
-            TaskRepository.ResetCalls();
+            TaskRepository.Invocations.Clear();
 
             var id = Guid.NewGuid();
             var typeId = 1;
@@ -40,7 +40,7 @@ namespace AsyncApiProxy.Unit.Tests.ServiceTests
         [TestMethod]
         public void GetTask_TaskNotExisted_ShouldReturnNull()
         {
-            TaskRepository.ResetCalls();
+            TaskRepository.Invocations.Clear();
 
             var id = Guid.NewGuid();
 
@@ -57,7 +57,7 @@ namespace AsyncApiProxy.Unit.Tests.ServiceTests
         [TestMethod]
         public void GetTaskResult_TaskExisted_ShouldReturnCorrect()
         {
-            TaskRepository.ResetCalls();
+            TaskRepository.Invocations.Clear();
 
             var id = Guid.NewGuid();
             var typeId = 1;
@@ -80,7 +80,7 @@ namespace AsyncApiProxy.Unit.Tests.ServiceTests
         [TestMethod]
         public void GetTaskResult_TaskNotExisted_ShouldReturnNull()
         {
-            TaskRepository.ResetCalls();
+            TaskRepository.Invocations.Clear();
 
             var id = Guid.NewGuid();
 
@@ -97,7 +97,7 @@ namespace AsyncApiProxy.Unit.Tests.ServiceTests
         [TestMethod]
         public void CreateTask_Correct_ShouldTask()
         {
-            TaskRepository.ResetCalls();
+            TaskRepository.Invocations.Clear();
 
             var taskId = Guid.NewGuid();
             var taskTypeId = 0;

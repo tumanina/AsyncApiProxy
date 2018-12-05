@@ -17,6 +17,11 @@ namespace AsyncApiProxy.Api.Areas.V1.Controllers
             _clientService = clientService;
         }
 
+        /// <summary>
+        /// Create new client by specified email, name and password.
+        /// </summary>
+        /// <param name="CreateClientRequest">Client email, name and password</param>
+        /// <returns>Execution status (ОК/500) and created client identifier or Task identifier in case of timeout.</returns>
         [HttpPost]
         public IActionResult Post([FromBody]CreateClientRequest request)
         {
@@ -35,7 +40,7 @@ namespace AsyncApiProxy.Api.Areas.V1.Controllers
                     return BadRequest("Email is empty.");
                 }
 
-                var result = _clientService.CreateClient(new Client { Name = request.Name, Email = request.Email } );
+                var result = _clientService.CreateClient(new Client { Name = request.Name, Email = request.Email, Password = request.Password } );
 
                 if (result.TaskId.HasValue)
                 {
