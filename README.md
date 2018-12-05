@@ -19,3 +19,7 @@ AsyncApi:
 - GET ping - проверка доступности и времени ответа сервера
 - POST /clients/ - добавления клиента
 - GET task/id получение информации о статусе и результате выполнения задачи.
+
+<p align="center">
+  <img src="https://github.com/tumanina/AsyncApiProxy/blob/master/AsyncApiProxy_swagger.png" width="350" title="API">
+</p>
