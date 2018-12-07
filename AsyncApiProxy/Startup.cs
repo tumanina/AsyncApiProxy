@@ -11,6 +11,9 @@ using AsyncApiProxy.DAL.DBContext;
 using Microsoft.EntityFrameworkCore;
 using AsyncApiProxy.DAL.Repositories;
 using Swashbuckle.AspNetCore.Swagger;
+using System.IO;
+using System;
+using System.Reflection;
 
 namespace AsyncApiProxy.Api
 {
@@ -30,10 +33,7 @@ namespace AsyncApiProxy.Api
             var dbOptions = new DbContextOptionsBuilder<TaskContext>();
             dbOptions.UseSqlServer(connectionString);
             services.AddSingleton<ITaskContextFactory>(t => new TaskContextFactory(dbOptions));
-
-
             services.AddSingleton<ITaskContext, TaskContext>();
-
             services.AddSingleton<ISubscriptionFactory, SubscriptionFactory>();
             services.AddSingleton<ISenderProcessor, SenderProcessor>();
             services.AddSingleton<IClientService, ClientService>();
@@ -43,6 +43,9 @@ namespace AsyncApiProxy.Api
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "AsyncApi", Version = "v1" });
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
             });
 
             services.AddMvc();
