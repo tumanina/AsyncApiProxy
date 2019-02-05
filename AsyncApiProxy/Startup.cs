@@ -62,9 +62,9 @@ namespace AsyncApiProxy.Api
                         UserName = sender.Server.UserName,
                         Password = sender.Server.Password
                     },
-                        sender.Type,
-                        sender.QueueName,
-                        sender.ExchangeName));
+                    sender.Type,
+                    sender.QueueName,
+                    sender.ExchangeName));
                 }
             }
 
@@ -93,7 +93,6 @@ namespace AsyncApiProxy.Api
             }
 
             app.UseSwagger();
-
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "AsyncApi V1");

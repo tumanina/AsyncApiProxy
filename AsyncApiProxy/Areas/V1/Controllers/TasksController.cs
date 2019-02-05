@@ -7,7 +7,7 @@ namespace AsyncApiProxy.Api.Areas.V1.Controllers
 {
     /// <inheritdoc />
     /// <summary>
-    /// Methods for viewing and managing tasks.
+    /// Method for viewing task information.
     /// </summary>
     [Route("api/v1/[controller]")]
     public class TasksController : BaseController

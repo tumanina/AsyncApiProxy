@@ -2,7 +2,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using RabbitMQ.Client;
 
-namespace MessageBroker.UnitTests
+namespace MessageBroker.Unit.Tests
 {
     [TestClass]
     public class SubscriptionFactoryTest

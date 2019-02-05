@@ -16,7 +16,6 @@ namespace MessageBroker
         public void SendMessage(string type, string message)
         {
             var sender = _senders.FirstOrDefault(t => t.Type.Equals(type, StringComparison.InvariantCultureIgnoreCase));
-
             if (sender == null)
             {
                 throw new Exception($"Sender for type '{type}' not found.");

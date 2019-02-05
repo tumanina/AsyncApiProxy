@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
-namespace MessageBroker.UnitTests
+namespace MessageBroker.Unit.Tests
 {
     [TestClass]
     public class SenderProcessorTest
@@ -14,7 +14,7 @@ namespace MessageBroker.UnitTests
             var message = "test message";
             var type = "test";
 
-            var sendingMessage = "";
+            var sendingMessage = string.Empty;
 
             var sender = new Mock<ISender>();
             sender.Setup(x => x.Type).Returns("test");
@@ -35,7 +35,7 @@ namespace MessageBroker.UnitTests
             var message = "test message";
             var type = "test1";
 
-            var sendingMessage = "";
+            var sendingMessage = string.Empty;
 
             var sender = new Mock<ISender>();
             sender.Setup(x => x.Type).Returns("test");

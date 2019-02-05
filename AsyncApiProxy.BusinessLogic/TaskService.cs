@@ -22,7 +22,6 @@ namespace AsyncApiProxy.BusinessLogic
         public Task GetTask(Guid id)
         {
             var task = _taskRepository.GetTask(id);
-
             return task == null ? null : new Task(task);
         }
     }

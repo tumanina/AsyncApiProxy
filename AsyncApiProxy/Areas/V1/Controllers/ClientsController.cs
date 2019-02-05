@@ -7,6 +7,10 @@ using System;
 
 namespace AsyncApiProxy.Api.Areas.V1.Controllers
 {
+    /// <inheritdoc />
+    /// <summary>
+    /// Method for creating new customer.
+    /// </summary>
     [Route("api/v1/[controller]")]
     public class ClientsController : BaseController
     {
@@ -20,8 +24,8 @@ namespace AsyncApiProxy.Api.Areas.V1.Controllers
         /// <summary>
         /// Create new client by specified email, name and password.
         /// </summary>
-        /// <param name="CreateClientRequest">Client email, name and password</param>
-        /// <returns>Execution status (ОК/500) and created client identifier or Task identifier in case of timeout.</returns>
+        /// <param name="request">Model that contain client email, name and password</param>
+        /// <returns>Execution status (ОК/500) and client identifier or Task identifier in case of timeout.</returns>
         [HttpPost]
         public IActionResult Post([FromBody]CreateClientRequest request)
         {

@@ -32,7 +32,6 @@ namespace AsyncApiProxy.BusinessLogic
             };
 
             var result = _requestManager.TryToExecute(MessageType.CreateClient.ToString(), JsonConvert.SerializeObject(message), callbackQueueName);
-
             if (result.Result)
             {
                 try

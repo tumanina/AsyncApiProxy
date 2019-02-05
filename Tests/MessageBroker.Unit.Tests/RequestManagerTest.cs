@@ -3,7 +3,6 @@ using Moq;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using RabbitMQ.Client.MessagePatterns;
-using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -22,8 +21,8 @@ namespace MessageBroker.Unit.Tests
         [TestMethod]
         public void TryToExecute_ResponseCaught_ShouldReturnTrueAndValue()
         {
-            ConnectionFactory.ResetCalls();
-            SenderProcessor.ResetCalls();
+            ConnectionFactory.Invocations.Clear();
+            SenderProcessor.Invocations.Clear();
 
             var message = "{ test }";
             var requestResult = "test result";

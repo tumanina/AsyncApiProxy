@@ -34,13 +34,11 @@ namespace MessageBroker
                 _senderProcessor.SendMessage(type, message);
 
                 var subscription = _subsctiptionFactory.CreateSubscription(channel, callbackQueueName, false);
-
                 var result = subscription.Next(_timeToWait, out var basicDeliveryEventArgs);
                 if (result)
                 {
                     var messageContent = Encoding.UTF8.GetString(basicDeliveryEventArgs.Body);
                     subscription.Ack(basicDeliveryEventArgs);
-
                     connection.Close();
                     return new RequestResult { Result = true, Value = messageContent };
                 }
@@ -50,7 +48,7 @@ namespace MessageBroker
                     return new RequestResult { Result = false };
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 connection.Close();
                 throw;

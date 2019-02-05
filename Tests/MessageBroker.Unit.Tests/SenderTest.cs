@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using RabbitMQ.Client;
 
-namespace MessageBroker.UnitTests
+namespace MessageBroker.Unit.Tests
 {
     [TestClass]
     public class SenderTest
@@ -16,9 +16,9 @@ namespace MessageBroker.UnitTests
         [TestMethod]
         public void SendMessage_UseConnectionFactoryAndModel()
         {
-            ConnectionFactory.ResetCalls();
+            ConnectionFactory.Invocations.Clear();
 
-            var message = "{ 'currency' : 'BTC' }";
+            var message = "{ 'name' : 'Smith' }";
             var queueName = "126_queue";
             var exchangeName = "exchange";
             var queueName1 = string.Empty;
@@ -51,7 +51,7 @@ namespace MessageBroker.UnitTests
             Connection.Setup(x => x.CreateModel()).Returns(Model.Object);
             ConnectionFactory.Setup(x => x.CreateConnection()).Returns(Connection.Object);
             
-            var sender = new Sender(ConnectionFactory.Object, "MakeTransfer", queueName, exchangeName);
+            var sender = new Sender(ConnectionFactory.Object, "CreateClient", queueName, exchangeName);
 
             sender.SendMessage(message);
 
